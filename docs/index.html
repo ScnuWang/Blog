@@ -7,24 +7,29 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
 </head>
 <body>
-
-  <nav>
-    <a href="#/quickstart/">入门指南系列</a>
-	<a href="#/pyton/">Python系列</a>
-    <a href="#/blcokchain/">区块链系列</a>
-  </nav>
   <div id="app"></div>
   <script>
-	  window.$docsify = {
-		/* 封面配置 渲染_coverpage.md */
-		coverpage: true
-		/* 默认加载 _navbar.md */
-		loadNavbar: true
-		
-	  }
+    window.$docsify = {
+	  loadNavbar: true
+    }
   </script>
-	<script src="//unpkg.com/docsify"></script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify-copy-code"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: '4787c0ba07320ae49984',
+      clientSecret: 'd0ad7e423c321b328a83a587ac5ed2fe7c79d505',
+      repo: 'Blog',
+      owner: 'ScnuWang',
+      admin: ['ScnuWang'],
+      // facebook-like distraction free mode
+      distractionFreeMode: true
+    })
+  </script>
 </body>
 </html>
