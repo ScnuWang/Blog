@@ -1,4 +1,4 @@
-## 你20多岁时的选择，会写在你40岁的脸上和你脱口而出的每一句话上。
+## Keep Learning And You Will Be Closer to Your Target
 
-- [docsify +Typora 构建自己的文档网站](docsify +Typora 构建自己的文档网站.md)
+- [入门指南系列](/quickstart/)
 

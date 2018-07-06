@@ -9,13 +9,22 @@
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
 </head>
 <body>
+
+  <nav>
+    <a href="#/quickstart/">入门指南系列</a>
+	<a href="#/pyton/">Python系列</a>
+    <a href="#/blcokchain/">区块链系列</a>
+  </nav>
   <div id="app"></div>
   <script>
-    window.$docsify = {
-      name: '',
-      repo: ''
-    }
+	  window.$docsify = {
+		/* 封面配置 渲染_coverpage.md */
+		coverpage: true
+		/* 默认加载 _navbar.md */
+		loadNavbar: true
+		
+	  }
   </script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+	<script src="//unpkg.com/docsify"></script>
 </body>
 </html>
