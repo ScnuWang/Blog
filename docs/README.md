@@ -1,35 +1,19 @@
+### 关于我
+
+一个来自偏远小山村的农家孩子
+
+一个自认为学习能力强，有上进心的小青年
 
 
-## docsify
 
-> A magical documentation site generator.
+### 联系我
 
-## What is it
+Email：scnu_wang@163.com
 
-docsify generates your documentation website on the fly. Unlike GitBook, it does not generate static html files. Instead, it smartly loads and parses your Markdown files and displays them as website. All you need to do is create an `index.html` to start and [deploy it on GitHub Pages](deploy.md).
+GitHub：https://github.com/ScnuWang
 
-See the [Quick start](quickstart.md) for more details.
 
-## Features
 
-- No statically built html files
-- Simple and lightweight (~19kB gzipped)
-- Smart full-text search plugin
-- Multiple themes
-- Useful plugin API
-- Emoji support
-- Compatible with IE10+
+### 声明
 
-- Support SSR ([example](https://github.com/docsifyjs/docsify-ssr-demo))
-
-## Examples
-
-Check out the [Showcase](https://github.com/docsifyjs/docsify/#showcase) to docsify in use.
-
-## Donate
-
-Please consider donating if you think docsify is helpful to you or that my work is valuable. I am happy if you can help me [buy a cup of coffee](https://github.com/QingWei-Li/donate). ❤️
-
-## Community
-
-Users and development team are in the [Gitter](https://gitter.im/docsifyjs/Lobby).
+任何第三方，都可以在遵循 [知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/) 的情况下分享本站的内容。 

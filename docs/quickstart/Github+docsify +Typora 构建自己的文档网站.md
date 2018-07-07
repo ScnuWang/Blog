@@ -49,13 +49,13 @@ Github+docsify +Typora 免费构建自己的文档网站
 
 ​	[部署](https://docsify.js.org/#/zh-cn/deploy)
 
-​	如果要绑定自己的域名的话：在自己的域名服务商的域名解析页面添加一条记录：
-
-​	![1530859461954](_media/20180706144542.png)
+​	如果要绑定自己的域名的话：在自己的域名服务商的域名解析页面添加一条CNAME记录：​
 
 ​	GitHub在验证通过之后，会自动在项目中添加一个CNAME文件
 
 ### 四、示例网站
 
 ​	[官方中文文档](https://docsify.js.org/#/zh-cn/)
+
+​	[Mybatis-Plus](http://mp.baomidou.com/#/)
 

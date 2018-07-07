@@ -1,1 +1,3 @@
-以太坊文章目录
+### 智能合约
+
+[智能合约最佳实践](/blockchain/smartcontract/首页.md)

@@ -3,4 +3,4 @@
 # Keep learn and you will be closer to your target
 
 [GitHub](https://github.com/ScnuWang)
-[博客](#docsify)
+[博客](#关于我)
