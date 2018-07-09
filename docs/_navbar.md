@@ -3,8 +3,8 @@
 * [首页](/)
 
 * Python系列
-  * [Django](python/django_nav.md)
   * [Python基础](python/basic_nav.md)
+  * [Django](python/django_nav.md)
 * 区块链系列
   * [比特币](blockchain/bitcoin_nav.md)
   * [以太坊](blockchain/etherum_nav.md)
