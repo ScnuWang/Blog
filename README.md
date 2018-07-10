@@ -47,7 +47,7 @@ Github+docsify +Typora 免费构建自己的文档网站
 
 ### 三、部署
 
-​	[部署](https://docsify.js.org/#/zh-cn/deploy)
+​	[部署GitHub](https://docsify.js.org/#/zh-cn/deploy)
 
 ​	如果要绑定自己的域名的话：在自己的域名服务商的域名解析页面添加一条CNAME记录：​
 
