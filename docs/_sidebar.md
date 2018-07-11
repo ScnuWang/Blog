@@ -10,4 +10,6 @@
   * [Nginx](deploy/nginx_nav.md)
 * 入门指南系列
   - [docker](quickstart/docker_nav.md)
-
+* 阅读
+  * [书单](read/booklist.md)
+  * [读书笔记](read/note_nav.md)
