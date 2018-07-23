@@ -13,6 +13,5 @@
 
 1. [does not support field _id](python/scrapy/does not support field _id.md)
 2. [not enough values to unpack](python/scrapy/not enough values to unpack.md)
-3. [通常每个套接字地址(协议/网络地址/端口)只允许使用一次](python/acrapy/通常每个套接字地址(协议/网络地址/端口)只允许使用一次.md)
-4. [signal only works in main thread](python/scrapy/signal only works in main thread.md)
+3. [signal only works in main thread](python/scrapy/signal only works in main thread.md)
 
