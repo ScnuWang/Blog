@@ -1,4 +1,6 @@
-### 一、分析
+### 一、覆写crawl.py
+
+#### 1.分析
 
 由于单个Spider执行的命令是scrapy crawl spider名称，
 
@@ -20,7 +22,7 @@ scrapy/commands/crawl.py
 
 那么如果我们获取到所有的spider列表，然后遍历执行，这样即可实现同时执行多个spider。
 
-### 二、实现
+#### 2.实现
 
 步骤一：在spiders同级目录新建一个目录commands,并新建文件crawlextend.py
 
@@ -42,3 +44,68 @@ scrapy/commands/crawl.py
 步骤四：在settings.py文件中添加COMMANDS_MODULE = 'geekparity.commands'，其中geekparity为爬虫工程名
 
 步骤五：执行命令：scrapy crawlextend即可
+
+
+
+### 二、使用scrapy自带的CrawlerProcess
+
+示例来自官方文档
+
+```python
+import scrapy from scrapy.crawler import CrawlerProcess
+class MySpider1(scrapy.Spider): 
+	# Your first spider definition ...
+class MySpider2(scrapy.Spider): 
+	# Your second spider definition
+	...
+# 如果需要使用settings文件里面的请求头，需要引入get_project_settings
+process = CrawlerProcess() 
+process.crawl(MySpider1) 
+process.crawl(MySpider2) 
+process.start() # the script will block here until all crawling jobs are finished
+```
+
+
+
+### 三、使用scrapy自带的CrawlerRunner
+
+示例来自官方文档
+
+```python
+import scrapy 
+from twisted.internet import reactor 
+from scrapy.crawler import CrawlerRunner 
+from scrapy.utils.log import configure_logging
+class MySpider1(scrapy.Spider): 
+	# Your first spider definition ...
+class MySpider2(scrapy.Spider): 
+	# Your second spider definition ...
+configure_logging() 
+runner = CrawlerRunner() 
+runner.crawl(MySpider1) 
+runner.crawl(MySpider2) 
+d = runner.join() 
+d.addBoth(lambda _: reactor.stop())
+reactor.run() # the script will block here until all crawling jobs are finished
+```
+
+指定抓取顺序：
+
+```python
+from twisted.internet import reactor, defer 
+from scrapy.crawler import CrawlerRunner 
+from scrapy.utils.log import configure_logging
+class MySpider1(scrapy.Spider): 
+	# Your first spider definition ...
+class MySpider2(scrapy.Spider): 
+	# Your second spider definition ...
+configure_logging() 
+runner = CrawlerRunner()
+@defer.inlineCallbacks 
+def crawl(): 
+	yield runner.crawl(MySpider1) 
+	yield runner.crawl(MySpider2) 
+	reactor.stop()
+crawl() reactor.run() # the script will block here until the last crawl call is finished
+```
+
