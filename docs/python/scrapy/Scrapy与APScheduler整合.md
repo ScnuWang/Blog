@@ -3,8 +3,6 @@
 整合代码：
 
 ```
-configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
-
 def crawlxiaomi():
     runner = CrawlerRunner(get_project_settings())
     runner.crawl(XiaomiSpider)
@@ -90,8 +88,6 @@ twisted.internet.error.ReactorNotRestartable
 整合代码：
 
 ```
-configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
-
 def crawlxiaomi():
     runner = CrawlerRunner(get_project_settings())
     runner.crawl(XiaomiSpider)
@@ -104,5 +100,34 @@ if __name__ == '__main__':
     sched = TwistedScheduler()
     sched.add_job(crawlxiaomi,'interval',seconds=60*1)
     sched.start()
+    
+     try:
+        reactor.run()
+    except Exception:
+        pass
 ```
 
+**上面这种方式有个问题，就是定时任务只执行一次。**
+
+解决方案：再加入多线程
+
+```python
+sched = BlockingScheduler()
+
+def crawl():
+    process = CrawlerProcess(get_project_settings())
+    process.crawl(XiaomiSpider)
+    process.crawl(WangyiSpider)
+    process.start()
+
+@sched.scheduled_job("interval",seconds=60)
+def run():
+    process = multiprocessing.Process(target=crawl)
+    process.start()
+
+
+if __name__ == '__main__':
+    sched.start()
+```
+
+参考：[用apscheduler 和 scrapy 做定时抓取爬虫为什么只爬取第一次？](https://www.zhihu.com/question/56701176/answer/340272979 )
