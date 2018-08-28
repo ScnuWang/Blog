@@ -10,8 +10,12 @@
   * [以太坊](blockchain/etherum_nav.md)
 * 运维系列
   - [Nginx](deploy/nginx_nav.md)
+* 数据库
+  * [MongoDB](database/mongodb_nav.md)
 * 入门指南系列
   * [docker](quickstart/docker_nav.md)
+* LeetCode
+  * [我的进度](leetcode/leetcode_nav.md)
 * 阅读
   * [书单](read/booklist.md)
   * [读书笔记](read/note_nav.md)
