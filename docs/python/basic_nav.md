@@ -7,3 +7,6 @@
 
 - [Python面向对象](http://study.163.com/course/courseMain.htm?courseId=1004569003)
 
+### 三、部署
+
+- [Scrapy的部署](python/basic/Scrapy的部署.md)
