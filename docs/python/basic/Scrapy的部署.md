@@ -9,7 +9,8 @@
 	Django 2.0.7
 	暂未考虑在虚拟环境中安装。
 	生成requirements.txt: pip freeze >requirements.txt
-	安装requirements.txt
+	安装requirements.txt：pip install requirements.txt
+	涉及第三方工具或者库：MongoDB、scrapyd、scrapykeeper、supervisor
 
 ### 一、安装pip3
 
@@ -167,10 +168,8 @@
 
    ```
    [deploy]
-   url = http://parity.geekview.cn:6800/
-   project = demo
-   username = username
-   password = password
+   url = http://localhost:6800/
+   project = demoproject
    ```
 
 5. 上传Scrapy项目到服务器，也可以直接通过git下载比较方便，这样后续迭代更新也会比较方便一些。
@@ -196,7 +195,7 @@
 
    五、运行Spider:
 
-   curl http://localhost:6800/schedule.json -d project=market_spider -d spider=newsspider
+   curl http://localhost:6800/schedule.json -d project=demoproject -d spider=newsspider
 
 
 
@@ -204,4 +203,122 @@
 
 ### 五、安装MongoDB
 
-	[官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+​	[官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+
+​	默认配置文件路径：/etc/mongod.conf
+
+
+
+### 六、定时抓取设置、保留进程
+
+如果成功走完上面所有的流程，那么已经可以直接跑，并且使用了，但是还有两个问题需要处理：
+
+- 不能让爬虫定时抓取
+- 命令窗口也不能关闭，关闭之后服务也关闭了（没有进程守护）
+
+1. ##### 安装spiderkeeper（[GitHub地址](https://github.com/DormyMo/SpiderKeeper)）：
+
+   这个库，可以让你跟pyspider一样在网页上设置scrapy项目的配置，定时抓取启动等等，这样就解决了我们的声明的第一个问题。
+
+   ```
+    pip install spiderkeeper
+   ```
+
+   spiderkeeper还是依赖scrapyd的，所以要先启动scrapyd，否则spiderkeeper也不能控制scrapy.
+
+   具体使用根据GitHub上面的文档，完全可以搞定。
+
+2. 安装supervisor
+
+   由于supervisor不支持python3.x的任何版本，所以需要使用python2.x来安装，
+
+   ```
+   pip2 install supervisor
+   ```
+
+   如果在安装目录和etc下面找不到supervisord_conf文件，那就自己生成一个：
+
+   ```
+   echo_supervisord_conf > /etc/supervisord.conf
+   ```
+
+   启动supervisor
+
+   ```
+   supervisord -c /etc/supervisord.conf
+   ```
+
+   编辑supervisord.conf 用如下代码覆盖全部默认代码（我已经将注释都删除掉）：
+
+   ```
+   [unix_http_server]
+   file=/tmp/supervisor.sock   ; the path to the socket file
+   
+   [inet_http_server]         ; inet (TCP) server disabled by default
+   port=127.0.0.1:9001        ; ip_address:port specifier, *:port for all iface
+   username=user              ; default is no username (open server)
+   password=123               ; default is no password (open server)
+   
+   [supervisord]
+   logfile=/tmp/supervisord.log ; main log file; default $CWD/supervisord.log
+   logfile_maxbytes=50MB        ; max main logfile bytes b4 rotation; default 50MB
+   logfile_backups=10           ; # of main logfile backups; 0 means none, default 10
+   loglevel=info                ; log level; default info; others: debug,warn,trace
+   pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid
+   nodaemon=false               ; start in foreground if true; default false
+   minfds=1024                  ; min. avail startup file descriptors; default 1024
+   minprocs=200                 ; min. avail process descriptors;default 200
+   
+   [rpcinterface:supervisor]
+   supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+   
+   [supervisorctl]
+   serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+   
+   [program:scrapyd]
+   command=scrapyd              ; the program (relative uses PATH, can take args)
+   process_name=%(program_name)s ; process_name expr (default %(program_name)s)
+   numprocs=1                    ; number of processes copies to start (def 1)
+   directory=/                ; directory to cwd to before exec (def no cwd)
+   priority=1                  ; the relative start priority (default 999)
+   autostart=true                ; start at supervisord start (default: true)
+   startretries=10	; max # of serial start failures when starting (default 3)
+   autorestart=true        ; when to restart if exited after running (def: unexpected)
+   exitcodes=0                 ; 'expected' exit codes used with autorestart (default 0,2)
+   stopsignal=KILL               ; signal used to kill process (default TERM)
+   stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)
+   
+   [program:scrapykeeper]
+   command=spiderkeeper --server=http://localhost:6800 ; the program (relative uses PATH, can take args)
+   process_name=%(program_name)s ; process_name expr (default %(program_name)s)
+   numprocs=1                    ; number of processes copies to start (def 1)
+   directory=/                ; directory to cwd to before exec (def no cwd)
+   priority=1                  ; the relative start priority (default 999)
+   autostart=true                ; start at supervisord start (default: true)
+   startretries=10	; max # of serial start failures when starting (default 3)
+   autorestart=true        ; when to restart if exited after running (def: unexpected)
+   exitcodes=0                 ; 'expected' exit codes used with autorestart (default 0,2)
+   stopsignal=KILL               ; signal used to kill process (default TERM)
+   stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)
+   ```
+
+   重启supervisor：
+
+   ```
+   root@iZwz9gfvwaa0qsyrd0cmupZ:~# supervisorctl reload
+   Restarted supervisord
+   ```
+
+   查看启动情况：
+
+   ```
+   root@iZwz9gfvwaa0qsyrd0cmupZ:~# supervisorctl status
+   scrapyd                          RUNNING   pid 20638, uptime 0:00:04
+   scrapykeeper                     RUNNING   pid 20637, uptime 0:00:04
+   ```
+
+3. 现在就可以在登录scrapykeeper上面对scrapy进行配置了。
+
+
+
+OK，终于啰里啰嗦的部署完了。整个流程走下来，相对于Java的部署来说，确实有些麻烦。
