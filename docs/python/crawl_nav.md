@@ -14,4 +14,5 @@
 1. [does not support field _id](python/scrapy/does not support field _id.md)
 2. [not enough values to unpack](python/scrapy/not enough values to unpack.md)
 3. [signal only works in main thread](python/scrapy/signal only works in main thread.md)
+4. [Windows系统下scrapy.cfg文件的中文注释异常](python/scrapy/Windows系统下scrapy.cfg文件的中文注释异常.md)
 

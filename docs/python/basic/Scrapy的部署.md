@@ -203,9 +203,9 @@
 
 ### 五、安装MongoDB
 
-​	[官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+	[官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
-​	默认配置文件路径：/etc/mongod.conf
+	默认配置文件路径：/etc/mongod.conf
 
 
 
@@ -317,7 +317,7 @@
    scrapykeeper                     RUNNING   pid 20637, uptime 0:00:04
    ```
 
-3. 现在就可以在登录scrapykeeper上面对scrapy进行配置了。
+3. 现在就可以在登录scrapykeeper（http://pa:5000）上面对scrapy进行配置了。
 
 
 
