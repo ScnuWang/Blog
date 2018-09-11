@@ -93,13 +93,13 @@
 1. 新建blog_uwsgi.ini文件（uwsgi支持多种类型的配置文件，如xml，ini等 ）并放在manage.py文件同级目录，将使用wsgi命令启动项目文件化，内容如下：
 
    ```
-    # Blog_uwsgi.ini file
+    # blog_uwsgi.ini file
    [uwsgi]
    
    # Django-related settings
    
    #指定项目执行的端口号。
-   socket = :8000
+   http = :8000
    
    # 应用所在目录路径
    chdir = /root/Blog
@@ -123,7 +123,7 @@
 2. 通过blog_uswgi.ini文件启动项目
 
    ```
-   uwsgi --ini Blog_uwsgi.ini # 需切换到blog_uwsgi.ini所在目录执行命令
+   uwsgi --ini blog_uwsgi.ini # 需切换到blog_uwsgi.ini所在目录执行命令
    ```
 
 3. 修改nginx.conf配置文件 /etc/nginx/nginx.conf ）
@@ -154,11 +154,11 @@
 
    >**nginx到底是如何uwsgi产生关联 ?**　
    >
-   >​    include uwsgi_params;
+   >    include uwsgi_params;
    >
    >　uwsgi_pass 127.0.0.1:8000;
    >
-   >　include 必须指定为uwsgi_params；而uwsgi_pass指的本机IP的端口号与blog_uwsgi.ini配置中的文件中的必须一致。
+   >　**include 必须指定为uwsgi_params；而uwsgi_pass指的本机IP的端口号与blog_uwsgi.ini配置中的文件中的必须一致。**
 
 4. 启动Nginx
 
@@ -171,7 +171,7 @@
 
 ### 四、个人总结
 
-​	这个教程实际上可以延伸到所有的Django项目部署，因为mezzanine 本身就是一个Django项目。
+	这个教程实际上可以延伸到所有的Django项目部署，因为mezzanine 本身就是一个Django项目。
 
 
 

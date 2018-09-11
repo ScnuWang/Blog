@@ -204,10 +204,10 @@
 ### 五、安装MongoDB
 
 	[官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
-
+	
 	默认配置文件路径：/etc/mongod.conf
 
-
+​	**这样安装，重启服务器，MongoDB不会自动启动**
 
 ### 六、定时抓取设置、保留进程
 
