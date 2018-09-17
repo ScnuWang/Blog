@@ -1,0 +1,1 @@
+https://www.lisen.org/use-django-to-save-emoji-expression-into-mysql.html
