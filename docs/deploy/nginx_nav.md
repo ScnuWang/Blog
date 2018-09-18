@@ -6,3 +6,4 @@
 
 [Ubuntu16.04部署mezzanine详细教程](deploy/Ubuntu16.04部署mezzanine详细教程.md)
 
+[记一次服务器迁移经历](deploy/记一次服务器迁移经历.md)
