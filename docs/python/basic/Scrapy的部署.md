@@ -9,7 +9,7 @@
 	Django 2.0.7
 	暂未考虑在虚拟环境中安装。
 	生成requirements.txt: pip freeze >requirements.txt
-	安装requirements.txt：pip install requirements.txt
+	安装requirements.txt：pip install -r requirements.txt
 	涉及第三方工具或者库：MongoDB、scrapyd、scrapykeeper、supervisor
 
 ### 一、安装pip3
@@ -29,7 +29,7 @@
 3. 更新pip3
 
     ```
-    python3 -m pip  install --upgrade pip 
+    python3 -m pip  install --upgrade pip #执行完之后，pip就是python3.5的pip,可通过pip -V查看
     或者 pip install -U pip
     ```
 
@@ -191,13 +191,11 @@
 
    版本号默认为当前时间戳，可自定义`scrapyd-deploy --version 201808311719`,版本号必须为纯数字，否则会报错。
 
-   回到根目录，能够看到/root/eggs/geekparity目录下包含一个egg文件。
+   回到根目录，能够看到/root/eggs/geekparity目录下包含一个egg文件,有可能在/eggs/geekparity目录下。
 
    五、运行Spider:
 
    curl http://localhost:6800/schedule.json -d project=demoproject -d spider=newsspider
-
-
 
    相关博文：https://www.colabug.com/2987685.html
 
@@ -226,6 +224,13 @@
 
    spiderkeeper还是依赖scrapyd的，所以要先启动scrapyd，否则spiderkeeper也不能控制scrapy.
 
+   修改spiderkeeper默认的用户名和密码：修改spiderkeeper安装目录下的config.py文件
+
+   ```
+   BASIC_AUTH_USERNAME = 'admin'
+   BASIC_AUTH_PASSWORD = 'admin'
+   ```
+
    具体使用根据GitHub上面的文档，完全可以搞定。
 
 2. 安装supervisor
@@ -234,6 +239,12 @@
 
    ```
    pip2 install supervisor
+   如果找不到pip2的话执行命令：apt install python-pip即可，校验结果如下
+   root@VM-0-7-ubuntu:~# pip -V
+   pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+   root@VM-0-7-ubuntu:~# pip2 -V
+   pip 8.1.1 from /usr/lib/python2.7/dist-packages (python 2.7)
+   
    ```
 
    如果在安装目录和etc下面找不到supervisord_conf文件，那就自己生成一个：
@@ -317,7 +328,7 @@
    scrapykeeper                     RUNNING   pid 20637, uptime 0:00:04
    ```
 
-3. 现在就可以在登录scrapykeeper（http://pa:5000）上面对scrapy进行配置了。
+3. 现在就可以在登录scrapykeeper（http://IP:5000）上面对scrapy进行配置了。
 
 
 
